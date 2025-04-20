@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Your Name - UI/UX Designer + Developer</title>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="styles.css">
+    </head>
+<body>
+    <nav class="navbar">
+        <div class="logo">YK</div>
+        <ul class="nav-links">
+            <li><a href="#home" class="active">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#contact">Contact Me</a></li>
+            <li><a href="#case-studies" class="case-studies-btn">Case Studies</a></li>
+        </ul>
+        <div class="menu-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <main id="home" class="hero">
+        <div class="hero-content">
+            <p class="greeting">HI THERE 👋 I'M</p>
+            <h1>Ismail Gargouri<br></h1>
+            <p class="role">FUTURE DATA ENGINEER 👨‍💻</p>
+            <p class="description">I'm a PhD Student in Computer Science that has skills in Data Science and Data Engineering based in Grand Forks, ND.</p>
+            <button class="hire-me">Hire Me</button>
+        </div>
+        <div class="hero-image">
+            <img src="avatar.png" alt="3D Avatar">
+        </div>
+    </main>
+
+    <section id="about" class="about">
+        <h2>About Me</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>Your compelling introduction goes here. Share your journey and passion for design and development.</p>
+                <div class="skills">
+                    <h3>Skills</h3>
+                    <div class="skill-tags">
+                        <span>UI Design</span>
+                        <span>UX Design</span>
+                        <span>HTML/CSS</span>
+                        <span>JavaScript</span>
+                        <span>React</span>
+                        <span>Figma</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="services">
+        <h2>Services</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <i class="service-icon">🎨</i>
+                <h3>Data Engineering</h3>
+                <p>Creating beautiful and intuitive interfaces that users love.</p>
+            </div>
+            <div class="service-card">
+                <i class="service-icon">💡</i>
+                <h3>UX Design</h3>
+                <p>Crafting seamless user experiences that solve real problems.</p>
+            </div>
+            <div class="service-card">
+                <i class="service-icon">💻</i>
+                <h3>Development</h3>
+                <p>Building responsive and performant web applications.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="portfolio">
+        <h2>Portfolio</h2>
+        <div class="portfolio-grid">
+            <!-- Add your portfolio items here -->
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <h2>Get In Touch</h2>
+        <div class="contact-content">
+            <form id="contact-form">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea placeholder="Your Message" required></textarea>
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Ismail Gargouri. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

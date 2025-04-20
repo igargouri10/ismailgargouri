@@ -1,0 +1,291 @@
+:root {
+    --neon-green: #00ff9d;
+    --dark-bg: #1a1a1a;
+    --text-white: #ffffff;
+    --text-gray: #888888;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--dark-bg);
+    color: var(--text-white);
+    line-height: 1.6;
+}
+
+/* Navigation */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 4rem;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    background: rgba(26, 26, 26, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+.logo {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+}
+
+.nav-links a {
+    color: var(--text-white);
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--neon-green);
+}
+
+.case-studies-btn {
+    background: var(--neon-green);
+    color: var(--dark-bg) !important;
+    padding: 0.8rem 1.5rem;
+    border-radius: 2rem;
+    font-weight: 600;
+    transition: transform 0.3s ease !important;
+}
+
+.case-studies-btn:hover {
+    transform: translateY(-3px);
+}
+
+/* Hero Section */
+.hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8rem 4rem 4rem;
+    min-height: 100vh;
+}
+
+.hero-content {
+    max-width: 600px;
+}
+
+.greeting {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+h1 {
+    font-size: 4rem;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+}
+
+.role {
+    color: var(--neon-green);
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.description {
+    color: var(--text-gray);
+    margin-bottom: 2rem;
+}
+
+.hire-me {
+    background: var(--neon-green);
+    color: var(--dark-bg);
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.hire-me:hover {
+    transform: translateY(-3px);
+}
+
+.hero-image {
+    width: 40%;
+    max-width: 500px;
+}
+
+.hero-image img {
+    width: 100%;
+    height: auto;
+}
+
+/* Sections */
+section {
+    padding: 6rem 4rem;
+}
+
+h2 {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+/* About Section */
+.about-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.skill-tags span {
+    background: rgba(0, 255, 157, 0.1);
+    color: var(--neon-green);
+    padding: 0.5rem 1.5rem;
+    border-radius: 2rem;
+    font-size: 0.9rem;
+}
+
+/* Services Section */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.service-card {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2rem;
+    border-radius: 1rem;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+}
+
+.service-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Contact Section */
+.contact-content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+input,
+textarea {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    color: var(--text-white);
+    font-size: 1rem;
+}
+
+textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+.submit-btn {
+    background: var(--neon-green);
+    color: var(--dark-bg);
+    border: none;
+    padding: 1rem;
+    border-radius: 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.submit-btn:hover {
+    transform: translateY(-3px);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Mobile Menu */
+.menu-btn {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    cursor: pointer;
+}
+
+.menu-btn span {
+    width: 25px;
+    height: 2px;
+    background: var(--text-white);
+    transition: 0.3s;
+}
+
+/* Responsive Design */
+@media (max-width: 968px) {
+    .navbar {
+        padding: 1.5rem 2rem;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .menu-btn {
+        display: flex;
+    }
+
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 6rem 2rem 2rem;
+    }
+
+    h1 {
+        font-size: 3rem;
+    }
+
+    .hero-image {
+        width: 80%;
+        margin-top: 3rem;
+    }
+
+    section {
+        padding: 4rem 2rem;
+    }
+}
