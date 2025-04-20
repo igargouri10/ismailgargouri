@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Your Name - UI/UX Designer + Developer</title>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="styles.css">
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ismail Gargouri - PhD Student in Computer Science</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
 <body>
     <nav class="navbar">
-        <div class="logo">YK</div>
+        <div class="logo">IG</div>
         <ul class="nav-links">
             <li><a href="#home" class="active">Home</a></li>
             <li><a href="#about">About</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#portfolio">Portfolio</a></li>
-            <li><a href="#contact">Contact Me</a></li>
-            <li><a href="#case-studies" class="case-studies-btn">Case Studies</a></li>
+            <li><a href="#research">Research</a></li>
+            <li><a href="#publications">Publications</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
         </ul>
         <div class="menu-btn">
             <span></span>
@@ -27,11 +27,11 @@
 
     <main id="home" class="hero">
         <div class="hero-content">
-            <p class="greeting">HI THERE 👋 I'M</p>
+            <p class="greeting">WELCOME TO MY PAGE 👋</p>
             <h1>Ismail Gargouri<br></h1>
-            <p class="role">FUTURE DATA ENGINEER 👨‍💻</p>
-            <p class="description">I'm a PhD Student in Computer Science that has skills in Data Science and Data Engineering based in Grand Forks, ND.</p>
-            <button class="hire-me">Hire Me</button>
+            <p class="role">PhD STUDENT IN COMPUTER SCIENCE 🎓</p>
+            <p class="description">Specializing in Data Engineering and Data Science at the University of North Dakota, Grand Forks.</p>
+            <button class="cv-download">Download CV</button>
         </div>
         <div class="hero-image">
             <img src="avatar.png" alt="3D Avatar">
@@ -42,47 +42,67 @@
         <h2>About Me</h2>
         <div class="about-content">
             <div class="about-text">
-                <p>Your compelling introduction goes here. Share your journey and passion for design and development.</p>
+                <p>I am a PhD student in Computer Science at the University of North Dakota, focusing on data engineering and data science. My research interests include big data analytics, machine learning, and distributed systems.</p>
                 <div class="skills">
-                    <h3>Skills</h3>
+                    <h3>Technical Skills</h3>
                     <div class="skill-tags">
-                        <span>UI Design</span>
-                        <span>UX Design</span>
-                        <span>HTML/CSS</span>
-                        <span>JavaScript</span>
-                        <span>React</span>
-                        <span>Figma</span>
+                        <span>Python</span>
+                        <span>R</span>
+                        <span>SQL</span>
+                        <span>Apache Spark</span>
+                        <span>Machine Learning</span>
+                        <span>Big Data</span>
+                        <span>Data Visualization</span>
+                        <span>Cloud Computing</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="services" class="services">
-        <h2>Services</h2>
-        <div class="services-grid">
-            <div class="service-card">
-                <i class="service-icon">🎨</i>
+    <section id="research" class="research">
+        <h2>Research Areas</h2>
+        <div class="research-grid">
+            <div class="research-card">
+                <i class="research-icon">📊</i>
                 <h3>Data Engineering</h3>
-                <p>Creating beautiful and intuitive interfaces that users love.</p>
+                <p>Building scalable data pipelines and architectures for big data processing and analytics.</p>
             </div>
-            <div class="service-card">
-                <i class="service-icon">💡</i>
-                <h3>UX Design</h3>
-                <p>Crafting seamless user experiences that solve real problems.</p>
+            <div class="research-card">
+                <i class="research-icon">🤖</i>
+                <h3>Machine Learning</h3>
+                <p>Developing and implementing advanced ML algorithms for data analysis and prediction.</p>
             </div>
-            <div class="service-card">
-                <i class="service-icon">💻</i>
-                <h3>Development</h3>
-                <p>Building responsive and performant web applications.</p>
+            <div class="research-card">
+                <i class="research-icon">💻</i>
+                <h3>Big Data Analytics</h3>
+                <p>Analyzing large-scale datasets to extract meaningful insights and patterns.</p>
             </div>
         </div>
     </section>
 
-    <section id="portfolio" class="portfolio">
-        <h2>Portfolio</h2>
-        <div class="portfolio-grid">
-            <!-- Add your portfolio items here -->
+    <section id="publications" class="publications">
+        <h2>Publications</h2>
+        <div class="publications-list">
+            <div class="publication-item">
+                <h3>Publication Title</h3>
+                <p class="authors">Authors: Gargouri, I., et al.</p>
+                <p class="venue">Conference/Journal Name, 2023</p>
+                <a href="#" class="paper-link">View Paper</a>
+            </div>
+            <!-- Add more publications as needed -->
+        </div>
+    </section>
+
+    <section id="projects" class="projects">
+        <h2>Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <h3>Project Title 1</h3>
+                <p>Description of your data science/engineering project</p>
+                <a href="#" class="project-link">View Project</a>
+            </div>
+            <!-- Add more projects as needed -->
         </div>
     </section>
 
@@ -95,11 +115,16 @@
                 <textarea placeholder="Your Message" required></textarea>
                 <button type="submit" class="submit-btn">Send Message</button>
             </form>
+            <div class="social-links">
+                <a href="#" target="_blank" class="social-link">LinkedIn</a>
+                <a href="#" target="_blank" class="social-link">GitHub</a>
+                <a href="#" target="_blank" class="social-link">Google Scholar</a>
+            </div>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2025 Ismail Gargouri. All rights reserved.</p>
+        <p>&copy; 2024 Ismail Gargouri. All rights reserved.</p>
     </footer>
 
     <script src="script.js"></script>

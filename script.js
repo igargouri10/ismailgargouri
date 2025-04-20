@@ -37,19 +37,31 @@ if (contactForm) {
     });
 }
 
+// CV download button
+document.querySelector('.cv-download').addEventListener('click', function() {
+    // Add your CV download logic here
+    window.open('./assets/Ismail_Gargouri.pdf', '_blank');
+});
+
 // Intersection Observer for scroll animations
 const observerOptions = {
     threshold: 0.2
 };
 
-const observer = new IntersectionObserver((entries) => {
+const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('animate');
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
         }
     });
 }, observerOptions);
 
-document.querySelectorAll('section').forEach(section => {
-    observer.observe(section);
+// Observe all sections and cards for animation
+document.querySelectorAll('section, .research-card, .publication-item, .project-card').forEach(element => {
+    element.style.opacity = '0';
+    element.style.transform = 'translateY(20px)';
+    element.style.transition = 'all 0.5s ease-out';
+    observer.observe(element);
 });
