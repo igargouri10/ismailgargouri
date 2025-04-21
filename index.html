@@ -2,13 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Ismail Gargouri - PhD Student in Computer Science</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/spline-runtime@0.9.442/build/spline-runtime.min.js"></script>
 </head>
 <body>
-    <nav class="navbar">
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+    
+    <nav class="navbar animate__animated animate__fadeInDown">
         <div class="logo">IG</div>
         <ul class="nav-links">
             <li><a href="#home" class="active">Home</a></li>
@@ -29,19 +35,34 @@
     </nav>
 
     <main id="home" class="hero">
-        <div class="hero-content">
+        <div class="hero-content animate__animated animate__fadeInLeft">
             <p class="greeting">WELCOME TO MY PAGE 👋</p>
-            <h1>Ismail Gargouri</h1>
+            <h1 class="glowing-text">Work faster with<br><span class="gradient-text">Ismail Gargouri</span></h1>
             <p class="role">PhD CANDIDATE IN COMPUTER SCIENCE 🎓</p>
-            <p class="description">Specializing in Data Engineering, Machine Learning, and AI Research at the University of North Dakota, Grand Forks. Expected Graduation: August 2029</p>
-            <button class="cv-download">Download CV</button>
+            <p class="description">Specializing in Data Engineering, Machine Learning, and AI Research at the University of North Dakota, Grand Forks.</p>
+            <div class="cta-buttons">
+                <button class="cv-download">Download CV</button>
+                <button class="video-intro">
+                    <span class="play-icon">▶</span>
+                    Video Intro
+                </button>
+            </div>
         </div>
-        <div class="hero-image">
-            <img src="avatar.png" alt="3D Avatar">
+        
+        <div class="hero-3d-container animate__animated animate__fadeInRight">
+            <canvas id="hero-3d"></canvas>
+        </div>
+
+        <div class="floating-elements">
+            <div class="floating-element" style="--delay: 0s"></div>
+            <div class="floating-element" style="--delay: 2s"></div>
+            <div class="floating-element" style="--delay: 4s"></div>
+            <div class="floating-element" style="--delay: 1s"></div>
+            <div class="floating-element" style="--delay: 3s"></div>
         </div>
     </main>
 
-    <section id="about" class="about">
+    <section id="about" class="about animate__animated" data-animate="fadeIn">
         <h2>About Me</h2>
         <div class="about-content">
             <div class="about-text">
@@ -65,7 +86,7 @@
         </div>
     </section>
 
-    <section id="education" class="education">
+    <section id="education" class="education animate__animated" data-animate="fadeIn">
         <h2>Education</h2>
         <div class="education-list">
             <div class="education-item">
@@ -86,7 +107,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="education-item">
+            <div class="education-item card-hover">
                 <h3>Bachelor of Science, Computer Science</h3>
                 <p class="institution">University of Sfax</p>
                 <p class="location">Sfax, Tunisia</p>
@@ -106,7 +127,7 @@
         </div>
     </section>
 
-    <section id="experience" class="experience">
+    <section id="experience" class="experience animate__animated" data-animate="fadeIn">
         <h2>Professional Experience</h2>
         <div class="experience-grid">
             <div class="experience-card">
@@ -204,11 +225,11 @@
         </div>
     </section>
 
-    <section id="projects" class="projects">
+    <section id="projects" class="projects animate__animated" data-animate="fadeIn">
         <h2>Notable Projects</h2>
         <div class="projects-grid">
             <div class="project-card">
-                <h3>Modeling Multiple Relationships Utilizing Multiple Linear Regression with Gradient Descent</h3>
+                <h3><a href="https://github.com/yourusername/mlr-gradient-descent" target="_blank">Modeling Multiple Relationships Utilizing Multiple Linear Regression with Gradient Descent</a></h3>
                 <p class="location">Grand Forks, ND</p>
                 <div class="project-details">
                     <ul>
@@ -220,7 +241,7 @@
             </div>
 
             <div class="project-card">
-                <h3>Training a Feedforward Neural Network for XOR Classification</h3>
+                <h3><a href="https://github.com/yourusername/xor-neural-network" target="_blank">Training a Feedforward Neural Network for XOR Classification</a></h3>
                 <p class="location">Grand Forks, ND</p>
                 <div class="project-details">
                     <ul>
@@ -232,7 +253,7 @@
             </div>
 
             <div class="project-card">
-                <h3>Pixel-Level Detection of AI-Generated Images Using CNNs and Grad-CAM</h3>
+                <h3><a href="https://github.com/yourusername/ai-image-detection" target="_blank">Pixel-Level Detection of AI-Generated Images Using CNNs and Grad-CAM</a></h3>
                 <p class="location">Grand Forks, ND</p>
                 <div class="project-details">
                     <ul>
@@ -244,7 +265,7 @@
             </div>
 
             <div class="project-card">
-                <h3>Development of a Focused Web Search Engine with TF-IDF-Based Page Ranking</h3>
+                <h3><a href="https://github.com/yourusername/web-search-engine" target="_blank">Development of a Focused Web Search Engine with TF-IDF-Based Page Ranking</a></h3>
                 <p class="location">Grand Forks, ND</p>
                 <div class="project-details">
                     <ul>
@@ -256,7 +277,7 @@
             </div>
 
             <div class="project-card">
-                <h3>Focused Web Crawler and Search Engine with PHP and MySQL</h3>
+                <h3><a href="https://github.com/yourusername/php-crawler" target="_blank">Focused Web Crawler and Search Engine with PHP and MySQL</a></h3>
                 <p class="location">Grand Forks, ND</p>
                 <div class="project-details">
                     <ul>
@@ -268,7 +289,7 @@
             </div>
 
             <div class="project-card">
-                <h3>Labeling & Classification of Income Tax Fraud of NY State Dataset</h3>
+                <h3><a href="https://github.com/yourusername/tax-fraud-detection" target="_blank">Labeling & Classification of Income Tax Fraud of NY State Dataset</a></h3>
                 <p class="location">Grand Forks, ND</p>
                 <div class="project-details">
                     <ul>
@@ -279,7 +300,7 @@
             </div>
 
             <div class="project-card">
-                <h3>Graph Search Algorithms: DFS & BFS for Maze Exploration</h3>
+                <h3><a href="https://github.com/yourusername/maze-search" target="_blank">Graph Search Algorithms: DFS & BFS for Maze Exploration</a></h3>
                 <p class="location">Grand Forks, ND</p>
                 <div class="project-details">
                     <ul>
@@ -290,7 +311,7 @@
             </div>
 
             <div class="project-card">
-                <h3>Optimized Q-Learning for Continuous State Control in CartPole-v1</h3>
+                <h3><a href="https://github.com/yourusername/cartpole-qlearning" target="_blank">Optimized Q-Learning for Continuous State Control in CartPole-v1</a></h3>
                 <p class="location">Grand Forks, ND</p>
                 <div class="project-details">
                     <ul>
@@ -302,7 +323,7 @@
             </div>
 
             <div class="project-card">
-                <h3>Database-Driven E-commerce Bookstore</h3>
+                <h3><a href="https://github.com/yourusername/bookstore-oracle" target="_blank">Database-Driven E-commerce Bookstore</a></h3>
                 <p class="location">Grand Forks, ND</p>
                 <div class="project-details">
                     <ul>
@@ -314,7 +335,7 @@
             </div>
 
             <div class="project-card">
-                <h3>User-Friendly Mobile App for Browsing and Purchasing Books</h3>
+                <h3><a href="https://github.com/yourusername/mobile-bookstore" target="_blank">User-Friendly Mobile App for Browsing and Purchasing Books</a></h3>
                 <p class="location">Grand Forks, ND</p>
                 <div class="project-details">
                     <ul>
@@ -326,7 +347,7 @@
             </div>
 
             <div class="project-card">
-                <h3>Full-Stack Job Board Application with React, Node.js, and Stripe</h3>
+                <h3><a href="https://github.com/yourusername/job-board" target="_blank">Full-Stack Job Board Application with React, Node.js, and Stripe</a></h3>
                 <p class="location">Sfax, Tunisia</p>
                 <div class="project-details">
                     <ul>
@@ -339,7 +360,7 @@
         </div>
     </section>
 
-    <section id="voluntary" class="voluntary">
+    <section id="voluntary" class="voluntary animate__animated" data-animate="fadeIn">
         <h2>Leadership & Voluntary Experience</h2>
         <div class="voluntary-grid">
             <div class="voluntary-card">
@@ -401,7 +422,7 @@
         </div>
     </section>
 
-    <section id="certifications" class="certifications">
+    <section id="certifications" class="certifications animate__animated" data-animate="fadeIn">
         <h2>Certifications</h2>
         <div class="certifications-grid">
             <div class="certification-card">
@@ -418,7 +439,7 @@
         </div>
     </section>
 
-    <section id="contact" class="contact">
+    <section id="contact" class="contact animate__animated" data-animate="fadeIn">
         <h2>Get In Touch</h2>
         <div class="contact-content">
             <form id="contact-form">
@@ -435,7 +456,7 @@
         </div>
     </section>
 
-    <footer>
+    <footer class="animate__animated animate__fadeInUp">
         <p>&copy; 2025 Ismail Gargouri. All rights reserved.</p>
     </footer>
 
