@@ -1,175 +1,176 @@
-// Custom cursor
+// Custom cursor with performance optimization
 const cursor = document.querySelector('.cursor');
 const cursorFollower = document.querySelector('.cursor-follower');
 
+let cursorTimeout;
 document.addEventListener('mousemove', (e) => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
+    cursor.style.left = `${e.clientX}px`;
+    cursor.style.top = `${e.clientY}px`;
     
-    setTimeout(() => {
-        cursorFollower.style.left = e.clientX + 'px';
-        cursorFollower.style.top = e.clientY + 'px';
-    }, 100);
+    clearTimeout(cursorTimeout);
+    cursorTimeout = setTimeout(() => {
+        cursorFollower.style.left = `${e.clientX}px`;
+        cursorFollower.style.top = `${e.clientY}px`;
+    }, 50);
 });
 
-// Cursor interactions
-document.querySelectorAll('a, button').forEach(element => {
+// Enhanced cursor interactions
+document.querySelectorAll('a, button, .card-header').forEach(element => {
     element.addEventListener('mouseenter', () => {
-        cursor.style.transform = 'scale(1.5)';
-        cursorFollower.style.transform = 'scale(1.5)';
+        cursor.classList.add('cursor-hover');
+        cursorFollower.classList.add('cursor-hover');
     });
     
     element.addEventListener('mouseleave', () => {
-        cursor.style.transform = 'scale(1)';
-        cursorFollower.style.transform = 'scale(1)';
+        cursor.classList.remove('cursor-hover');
+        cursorFollower.classList.remove('cursor-hover');
     });
 });
 
-// 3D Scene Setup
+// Optimized 3D Scene
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 const renderer = new THREE.WebGLRenderer({
     canvas: document.getElementById('hero-3d'),
     alpha: true,
-    antialias: true
+    antialias: true,
+    powerPreference: "high-performance"
 });
 
-renderer.setSize(window.innerWidth / 2, window.innerHeight);
+// Responsive renderer setup
+function updateRendererSize() {
+    const container = document.querySelector('.hero-3d-container');
+    if (container) {
+        const width = container.clientWidth;
+        const height = container.clientHeight;
+        renderer.setSize(width, height);
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+    }
+}
+
+updateRendererSize();
 camera.position.z = 5;
 
-// Create animated 3D elements
+// Modern 3D elements
 const geometry = new THREE.TorusKnotGeometry(1, 0.3, 100, 16);
 const material = new THREE.MeshPhongMaterial({
     color: 0x8b5cf6,
     shininess: 100,
-    specular: 0xffffff
+    specular: 0xffffff,
+    flatShading: true
 });
 const torusKnot = new THREE.Mesh(geometry, material);
 scene.add(torusKnot);
 
-// Add lights
-const light1 = new THREE.PointLight(0x8b5cf6, 1);
-light1.position.set(0, 2, 3);
-scene.add(light1);
+// Enhanced lighting
+const lights = [
+    { color: 0x8b5cf6, position: [0, 2, 3] },
+    { color: 0xec4899, position: [3, -2, 3] },
+    { color: 0x3b82f6, position: [-3, 0, 2] }
+];
 
-const light2 = new THREE.PointLight(0xec4899, 1);
-light2.position.set(3, -2, 3);
-scene.add(light2);
+lights.forEach(light => {
+    const pointLight = new THREE.PointLight(light.color, 1);
+    pointLight.position.set(...light.position);
+    scene.add(pointLight);
+});
 
-// Animation loop
+// Optimized animation loop
+let animationFrameId;
 function animate() {
-    requestAnimationFrame(animate);
+    animationFrameId = requestAnimationFrame(animate);
     torusKnot.rotation.x += 0.01;
     torusKnot.rotation.y += 0.01;
     renderer.render(scene, camera);
 }
-animate();
 
-// Responsive 3D scene
-window.addEventListener('resize', () => {
-    const width = window.innerWidth / 2;
-    const height = window.innerHeight;
-    camera.aspect = width / height;
-    camera.updateProjectionMatrix();
-    renderer.setSize(width, height);
-});
-
-// Scroll Animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
+// Start/Stop animation based on visibility
+const heroSection = document.querySelector('#home');
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            entry.target.classList.add('animate__animated');
-            entry.target.classList.add(entry.target.dataset.animate);
-            observer.unobserve(entry.target);
+            animate();
+        } else {
+            cancelAnimationFrame(animationFrameId);
         }
     });
-}, observerOptions);
+}, { threshold: 0.1 });
 
-document.querySelectorAll('[data-animate]').forEach(element => {
-    observer.observe(element);
+if (heroSection) observer.observe(heroSection);
+
+// Debounced resize handler
+let resizeTimeout;
+window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(updateRendererSize, 250);
 });
 
-// Smooth Scrolling
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+// Enhanced scroll animations with performance optimization
+const scrollObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('animate__fadeIn');
+            scrollObserver.unobserve(entry.target);
         }
     });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('section').forEach(section => {
+    scrollObserver.observe(section);
 });
 
-// Parallax Effect for Floating Elements
-document.addEventListener('mousemove', (e) => {
-    const moveX = (e.clientX - window.innerWidth / 2) * 0.005;
-    const moveY = (e.clientY - window.innerHeight / 2) * 0.005;
-
-    document.querySelectorAll('.floating-element').forEach(element => {
-        element.style.transform = `translate(${moveX}px, ${moveY}px)`;
-    });
-});
-
-// Video Intro Modal
-const videoIntroBtn = document.querySelector('.video-intro');
-if (videoIntroBtn) {
-    videoIntroBtn.addEventListener('click', () => {
-        // Add your video modal implementation here
-        alert('Video introduction coming soon!');
-    });
-}
-
-// Dynamic Text Animation
+// Optimized dynamic text animation
 const roles = ['PhD Candidate', 'Data Engineer', 'ML Researcher', 'AI Enthusiast'];
-let roleIndex = 0;
 const roleElement = document.querySelector('.role');
 
-function updateRole() {
-    roleElement.style.opacity = 0;
-    setTimeout(() => {
-        roleElement.textContent = roles[roleIndex];
-        roleElement.style.opacity = 1;
-        roleIndex = (roleIndex + 1) % roles.length;
-    }, 500);
-}
-
 if (roleElement) {
+    let roleIndex = 0;
+    function updateRole() {
+        roleElement.style.opacity = 0;
+        setTimeout(() => {
+            roleElement.textContent = roles[roleIndex];
+            roleElement.style.opacity = 1;
+            roleIndex = (roleIndex + 1) % roles.length;
+        }, 500);
+    }
     setInterval(updateRole, 3000);
 }
 
-// Card Hover Effects
-document.querySelectorAll('.experience-card, .project-card, .voluntary-card, .certification-card').forEach(card => {
+// Modern card interactions
+document.querySelectorAll('.project-card, .leadership-card, .certification-card').forEach(card => {
     card.addEventListener('mouseenter', () => {
-        card.style.transform = 'translateY(-10px) scale(1.02)';
+        card.style.transform = 'translateY(-5px)';
     });
 
     card.addEventListener('mouseleave', () => {
-        card.style.transform = 'translateY(0) scale(1)';
+        card.style.transform = 'translateY(0)';
     });
 });
 
-// Mobile Menu Toggle
-const menuBtn = document.querySelector('.menu-btn');
-const navLinks = document.querySelector('.nav-links');
-
-menuBtn.addEventListener('click', () => {
-    menuBtn.classList.toggle('active');
-    navLinks.classList.toggle('active');
-});
-
-// Close mobile menu when clicking outside
-document.addEventListener('click', (e) => {
-    if (!menuBtn.contains(e.target) && !navLinks.contains(e.target)) {
-        menuBtn.classList.remove('active');
-        navLinks.classList.remove('active');
-    }
-});
-
+// Contact form handling
+const contactForm = document.getElementById('contact-form');
+if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const submitBtn = contactForm.querySelector('.submit-btn');
+        const originalText = submitBtn.innerHTML;
+        
+        try {
+            submitBtn.innerHTML = 'Sending...';
+            // Add your form submission logic here
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            submitBtn.innerHTML = 'Sent Successfully!';
+            contactForm.reset();
+            
+            setTimeout(() => {
+                submitBtn.innerHTML = originalText;
+            }, 2000);
+        } catch (error) {
+            submitBtn.innerHTML = 'Error Sending';
+            setTimeout(() => {
+                submitBtn.innerHTML = originalText;
+            }, 2000);
+        }
+    });
+}
