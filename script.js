@@ -1,67 +1,136 @@
-// Smooth scrolling for navigation links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
-    });
-});
-
-// Navbar scroll effect
-const navbar = document.querySelector('.navbar');
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-        navbar.style.background = 'rgba(26, 26, 26, 0.98)';
-    } else {
-        navbar.style.background = 'rgba(26, 26, 26, 0.95)';
-    }
-});
-
-// Mobile menu toggle
+// Menu Toggle Functionality
 const menuBtn = document.querySelector('.menu-btn');
 const navLinks = document.querySelector('.nav-links');
 
 menuBtn.addEventListener('click', () => {
-    navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+    navLinks.classList.toggle('active');
+    menuBtn.classList.toggle('active');
 });
 
-// Form submission
+// Smooth Scrolling for Navigation Links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+            // Close mobile menu if open
+            navLinks.classList.remove('active');
+            menuBtn.classList.remove('active');
+        }
+    });
+});
+
+// Active Navigation Link Highlighting
+const sections = document.querySelectorAll('section');
+const navItems = document.querySelectorAll('.nav-links a');
+
+window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (scrollY >= (sectionTop - sectionHeight / 3)) {
+            current = section.getAttribute('id');
+        }
+    });
+
+    navItems.forEach(item => {
+        item.classList.remove('active');
+        if (item.getAttribute('href').slice(1) === current) {
+            item.classList.add('active');
+        }
+    });
+});
+
+// Contact Form Handling
 const contactForm = document.getElementById('contact-form');
 if (contactForm) {
     contactForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        // Add your form submission logic here
-        alert('Thank you for your message! I will get back to you soon.');
+        const formData = new FormData(contactForm);
+        console.log('Form submitted:', Object.fromEntries(formData));
         contactForm.reset();
+        alert('Thank you for your message! I will get back to you soon.');
     });
 }
 
-// CV download button
-document.querySelector('.cv-download').addEventListener('click', function() {
-    // Add your CV download logic here
-    window.open('./assets/Ismail_Gargouri.pdf', '_blank');
+// CV Download Button
+const cvButton = document.querySelector('.cv-download');
+if (cvButton) {
+    cvButton.addEventListener('click', () => {
+        window.location.href = 'path/to/your/cv.pdf';
+    });
+}
+
+// Scroll to Top Button
+const scrollTopButton = document.createElement('button');
+scrollTopButton.innerHTML = '↑';
+scrollTopButton.className = 'scroll-top';
+document.body.appendChild(scrollTopButton);
+
+scrollTopButton.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
 });
 
-// Intersection Observer for scroll animations
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 500) {
+        scrollTopButton.style.display = 'block';
+    } else {
+        scrollTopButton.style.display = 'none';
+    }
+});
+
+// Section Animations
 const observerOptions = {
-    threshold: 0.2
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
 };
 
-const observer = new IntersectionObserver(entries => {
+const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            entry.target.classList.add('animate');
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
         }
     });
 }, observerOptions);
 
-// Observe all sections and cards for animation
-document.querySelectorAll('section, .research-card, .publication-item, .project-card').forEach(element => {
-    element.style.opacity = '0';
-    element.style.transform = 'translateY(20px)';
-    element.style.transition = 'all 0.5s ease-out';
-    observer.observe(element);
+document.querySelectorAll('section').forEach(section => {
+    section.classList.add('fade-in');
+    observer.observe(section);
+});
+
+// Card Hover Effects
+document.querySelectorAll('.experience-card, .project-card, .voluntary-card, .certification-card').forEach(card => {
+    card.addEventListener('mouseenter', () => {
+        card.style.transform = 'translateY(-5px)';
+    });
+
+    card.addEventListener('mouseleave', () => {
+        card.style.transform = 'translateY(0)';
+    });
+});
+
+// Mobile Navigation Menu
+document.addEventListener('click', (e) => {
+    if (!menuBtn.contains(e.target) && !navLinks.contains(e.target)) {
+        navLinks.classList.remove('active');
+        menuBtn.classList.remove('active');
+    }
+});
+
+// Prevent Form Submission on Enter Key
+document.querySelectorAll('input').forEach(input => {
+    input.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+        }
+    });
 });
